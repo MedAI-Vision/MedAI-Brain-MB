@@ -1,4 +1,8 @@
-# Artificial Intelligence Analysis on Medulloblastoma
+# Artificial Intelligence-Enabled Molecular Subgroup Prediction in Medulloblastoma
+This repo is the official implementation of "Advancing presurgical non-invasive molecular subgroup prediction in medulloblastoma using artificial intelligence and MRI signatures". For more details, see the accompanying paper,
+
+> [**Advancing presurgical non-invasive molecular subgroup prediction in medulloblastoma using artificial intelligence and MRI signatures**](https://www.cell.com/cancer-cell/fulltext/S1535-6108(24)00227-7)<br/>
+  Yan-Ran Joyce Wang, Pengcheng Wang, Zihan Yan, Quan Zhou, Fatma Gunturkun, et al. <b>Cancer Cell</b>, May 13, 2024. https://doi.org/10.1016/j.ccell.2024.06.002
 
 - Data Preprocessing
 - Tumor Segmentation
