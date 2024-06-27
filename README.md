@@ -1,10 +1,15 @@
 # Artificial Intelligence-Enabled Molecular Subgroup Prediction in Medulloblastoma
-This repo is the official implementation of "Advancing presurgical non-invasive molecular subgroup prediction in medulloblastoma using artificial intelligence and MRI signatures". For more details, see the accompanying paper,
 
-> [**Advancing presurgical non-invasive molecular subgroup prediction in medulloblastoma using artificial intelligence and MRI signatures**](https://www.cell.com/cancer-cell/fulltext/S1535-6108(24)00227-7)<br/>
-  Yan-Ran Joyce Wang, Pengcheng Wang, Zihan Yan, Quan Zhou, Fatma Gunturkun, et al. <b>Cancer Cell</b>, June 27, 2024. https://doi.org/10.1016/j.ccell.2024.06.002
+This repo is the official implementation of "Advancing presurgical non-invasive molecular subgroup prediction in
+medulloblastoma using artificial intelligence and MRI signatures". For more details, see the accompanying paper,
+
+> [**Advancing presurgical non-invasive molecular subgroup prediction in medulloblastoma using artificial intelligence
+and MRI signatures**](https://www.cell.com/cancer-cell/fulltext/S1535-6108(24)00227-7)<br/>
+Yan-Ran Joyce Wang, Pengcheng Wang, Zihan Yan, Quan Zhou, Fatma Gunturkun, et al. <b>Cancer Cell</b>, June 27,
+2024. https://doi.org/10.1016/j.ccell.2024.06.002
 
 ## Outline
+
 - Data Preprocessing
 - Tumor Segmentation
 - Feature Extraction, Selection and Classification
@@ -84,8 +89,10 @@ For inference based on trained model
   Create `nnUNet_workdir` and three subfolders, please read the documentation
   of [nnUNetv1](https://github.com/MIC-DKFZ/nnUNet/tree/nnunetv1) for details. If you only want to test the model, you
   needn't create any files or folds under `nnUNet_raw_data` and `nnUNet_preprocessed`. We provide `RESULTS_FOLDER` which
-  contains trained model's checkpoints. In our [colab notebook](https://colab.research.google.com/drive/1FoBDfPAeU_PH22VQyn-vrUED_bHM5Vpc?usp=sharing![image](https://github.com/MedAI-Brain/MB_AI/assets/148333553/2a2fa14f-ab6b-4e82-9c77-8059da06ee77)
-), we provide the download link and method in the notebook, you can download `RESULTS_FOLDER` either to your desktop or just to google drive.
+  contains trained model's checkpoints. In
+  our [colab notebook](https://colab.research.google.com/drive/1FoBDfPAeU_PH22VQyn-vrUED_bHM5Vpc?usp=sharing![image](https://github.com/MedAI-Brain/MB_AI/assets/148333553/2a2fa14f-ab6b-4e82-9c77-8059da06ee77)
+  ), we provide the download link and method in the notebook, you can download `RESULTS_FOLDER` either to your desktop
+  or just to google drive.
 
   ```shell
   nnUNetData
@@ -173,18 +180,23 @@ nnUNet_predict -i [PATH OF TEST DATASET] -o [OUTPUT PATH] -tr nnUNetTrainerV2 -c
 
 Please notice that you don't have to make `dataset.json` for testing dataset.
 
-## Feature Extraction, Selection and Classification
+## Feature Extraction, Selection, Classification and importance analysis
 
 #### Feature Extraction
+
 ```python
-!pip install pyradiomics
+!pip
+install
+pyradiomics
 import radiomics
+
 feature_extractor = radiomics.featureextractor.RadiomicsFeatureExtractor()
 feature_vector_intra = feature_extractor.execute(image, intra_mask)
 feature_vector_peri = feature_extractor.execute(image, peri_mask)
 ```
 
 #### Feature Selection
+
 - Random forest
   ```python
   import numpy as np
@@ -208,3 +220,26 @@ feature_vector_peri = feature_extractor.execute(image, peri_mask)
   data = data.loc[:,reduce_col]
   ```
 - Other methods like LASSO, etc.
+
+#### Feature Classification
+
+- LightGBM
+  ```python
+  from lightgbm import LGBMClassifier
+  # Initialize the LGBMClassifier and set its parameters
+  modellgb = LGBMClassifier()
+  modellgb.set_params(**params)
+
+  # Fit the model using the training data
+  clf_lg = modellgb.fit(X_train, y_train)
+  ```
+  
+- Other methods like SVM, etc.
+
+#### Shapley Value Analysis
+  ```python
+    import shap
+    explainer = shap.TreeExplainer(clf_lg).shap_values(X_val)
+    shap_values = explainer
+    shap.summary_plot(shap_values, X_val, max_display=30, plot_size=(20, 8))
+  ```

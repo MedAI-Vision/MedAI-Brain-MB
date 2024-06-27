@@ -1,4 +1,3 @@
-
 import csv
 from intensity_normalization.normalize.zscore import ZScoreNormalize
 import numpy as np
@@ -18,7 +17,7 @@ warnings.filterwarnings("ignore")
 
 
 
-def  data_preprocessing(data_path, print_detail = True):
+def data_preprocessing(data_path, print_detail = True):
     data = pd.read_csv(data_path)
     # remove index
     if "Unnamed: 0" in data.columns:
@@ -232,6 +231,7 @@ aucs = []
 data_temp = data_normalization(st1_data)
 data = pd.concat([data_temp,st1_label],axis=1)  
 
+# select features by RF and get auc score by SVM
 for _ in range(iter_num):
     threshold = 0.8
     st1_data, st1_label = data.iloc[:,:-1], data.iloc[:,-1]

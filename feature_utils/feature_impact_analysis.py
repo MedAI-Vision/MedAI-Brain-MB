@@ -10,8 +10,7 @@ data = pd.read_csv("./data.csv")
 train = data.loc[(data["fold"] == 'train')]
 test = data.loc[(data["fold"] == 'test')]
 
-features = ['', #features need to be analyse
-'molecular']
+features = [''] # features need to be analysed
 test = test[features]
 
 plt.figure(figsize=(25,10))

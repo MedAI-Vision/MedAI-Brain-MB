@@ -8,7 +8,7 @@ patch_sklearn()
 warnings.filterwarnings("ignore")
 
 
-def  data_preprocessing(data_path, print_detail = True):
+def data_preprocessing(data_path, print_detail = True):
     data = pd.read_csv(data_path)
     # remove index
     if "Unnamed: 0" in data.columns:
@@ -37,7 +37,7 @@ data = data.loc[(data["fold"] == 'train')]
 y_train,x_train = data.iloc[:,-1],data.iloc[:,:-1]
 dict1 = {}
 
-
+# calculate AUC directly for each feature
 for col_name, col_data in x_train.iteritems():
     auc = roc_auc_score(y_train, col_data) 
     dict1[col_name] = auc
