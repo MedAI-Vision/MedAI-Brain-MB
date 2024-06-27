@@ -4,6 +4,7 @@ This repo is the official implementation of "Advancing presurgical non-invasive 
 > [**Advancing presurgical non-invasive molecular subgroup prediction in medulloblastoma using artificial intelligence and MRI signatures**](https://www.cell.com/cancer-cell/fulltext/S1535-6108(24)00227-7)<br/>
   Yan-Ran Joyce Wang, Pengcheng Wang, Zihan Yan, Quan Zhou, Fatma Gunturkun, et al. <b>Cancer Cell</b>, June 27, 2024. https://doi.org/10.1016/j.ccell.2024.06.002
 
+## Outline
 - Data Preprocessing
 - Tumor Segmentation
 - Feature Extraction, Selection and Classification
