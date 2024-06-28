@@ -23,7 +23,7 @@ IF_CORRECT_MASK = True
     2: zero out based on brain mask, only histogram equalization with mask=brain_mask
     3: zero out based on brain mask, do match_histogram with mask=brain_mask
 """
-DATA_TRANSFORMATION_TYPE = "2-3"
+DATA_TRANSFORMATION_TYPE = "2"
 IF_CROP = False
 
 
