@@ -184,9 +184,7 @@ Please notice that you don't have to make `dataset.json` for testing dataset.
 #### Feature Extraction
 
 ```python
-!pip
-install
-pyradiomics
+!pip install pyradiomics
 import radiomics
 
 feature_extractor = radiomics.featureextractor.RadiomicsFeatureExtractor()
